@@ -30,8 +30,3 @@ class Game:
 if __name__ == '__main__':
     game = Game()
     game.run()
-
-
-# GameBg = pygame.image.load(os.path.join('Maps', 'GBG.jpg'))
-# GameBg = pygame.transform.scale(GameBg, (640, 480))
-# Player_img = pygame.image.load(os.path.join('Sprite', 'doctor.png')).convert_alpha()

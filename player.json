@@ -1,0 +1,68 @@
+{
+    "SpriteSheetMap":{
+        "Title": "Player Sprite 288 x 480pxs",
+        "Sprite_Sheet": "player.png",
+        "Dimensions": [48, 48],
+        "Value_Keys": ["down","left","right","up"],
+        "Suffix_Keys":["_idle"],
+        "Values_Map":{
+            "down_idle":{
+                "sprite_details":{
+                    "row": 0,
+                    "count": 6,
+                    "start": 0
+                }
+            }, 
+            "right_idle":{
+                "sprite_details":{
+                    "row": 1,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "up_idle":{
+                "sprite_details":{
+                    "row": 2,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "left_idle":{
+                "sprite_details":{
+                    "row": 1,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "down":{
+                "sprite_details":{
+                    "row": 3,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "right":{
+                "sprite_details":{
+                    "row": 4,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "up":{
+                "sprite_details":{
+                    "row": 5,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "left":{
+                "sprite_details":{
+                    "row": 4,
+                    "count": 6,
+                    "start": 0
+                }
+            }
+        },
+        "Notes": "For the Values_Map, each entry gives 0 based row, count of sprites in row, start='topleft x' of first sprite."
+    }
+}

@@ -1,42 +1,44 @@
 import pygame
-import spritesheet
+import spritesheet as ss
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group):
         super().__init__(group)
 
-        # General attributes
-        self.image = pygame.Surface((32, 64))
-        self.image.fill('green')
+        # Player Animations
+        self.sprite_sheet = ss.SpriteSheet('./Sprite/characters/player.png', 'player.json')
+        self.animation = self.sprite_sheet.sprites()
+
+        self.status = 'down_idle'
+        self.frame_index = 0
+
+        # General attributes and animation
+        self.image = self.animation[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
 
         # Movement attributes
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2()
         self.speed = 10
+        self.animation_status = self.animation.keys()
 
-    def import_assets(self):
-        self.animations = {'up': [], 'down': [], 
-                        'right': [], 'left': [],
-                        'up_idle': [], 'down_idle': [],
-                        'right_idle': [], 'left_idle': [],
-                        'up_sword': [], 'down_sword': [], 
-                        'right_sword': [], 'left_sword': []}
-        # img in up down
-        
 
     def animate(self, dt):
-        pass
+        self.frame_index += 6 * dt
+        if self.frame_index >= len(self.animation[self.status]):
+            self.frame_index = 0
 
+        self.image = self.animation[self.status][int(self.frame_index)]
+    
     def input(self):
         keys = pygame.key.get_pressed()
 
         # Create direction
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.direction.y = 1
+            self.direction.y = -1
             self.status = 'up'
         elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.direction.y = -1
+            self.direction.y = 1
             self.status = 'down'
         else:
             self.direction.y = 0
@@ -59,16 +61,16 @@ class Player(pygame.sprite.Sprite):
 
     def get_status(self):
 
-        # idle movement
+        # idle status
         if self.direction.magnitude() == 0:
-            pass
-            # self.status = self.status.split('_')[0] + '_idle'
+            self.status = self.status.split('_')[0] + '_idle'
         
         # if self.timers['tool']
 
     # def update_timers(self):
         # for timer in self.timer_values():
         #     pass
+
 
     def move(self, dt):
         if self.direction.magnitude() > 0:
@@ -81,6 +83,7 @@ class Player(pygame.sprite.Sprite):
         #vertical movement
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
+
 
     def update(self, dt):
         self.input()

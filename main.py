@@ -18,14 +18,14 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-                dt = self.clock.tick() / 1000
-                self.level.run(dt)
-                pygame.display.update()
+            dt = self.clock.tick() / 1000
+            self.level.run(dt)
+            pygame.display.update()
 
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_LCTRL] and keys[pygame.K_q]:
-                    pygame.quit()
-                    sys.exit()
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_LCTRL] and keys[pygame.K_q]:
+                pygame.quit()
+                sys.exit()
 
 if __name__ == '__main__':
     game = Game()

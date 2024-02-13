@@ -73,7 +73,7 @@ class Player(pygame.sprite.Sprite):
                 self.direction = pygame.math.Vector2()
                 self.frame_index = 0
 
-            if keys[pygame.K_q] and not self.timers['tool swap'].activate:
+            if keys[pygame.K_e] and not self.timers['tool swap'].activate:
                 self.timers['tool swap'].activate()
                 # Ternary in python
                 self.tool_index = self.tool_index if self.tool_index < len(self.tools) else 0
@@ -90,6 +90,7 @@ class Player(pygame.sprite.Sprite):
             self.status = self.status.split('_')[0] + '_idle'
         
         if self.timers['tool use'].activate:
+            # pass
             self.status = self.status.split('_')[0] + '_' + self.selected_tool
 
     def update_timers(self):

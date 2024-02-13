@@ -62,13 +62,41 @@
                     "start": 0
                 }
             },
-            "sword":{
+            "down_sword":{
                 "sprite_details":{
-                    "row": 4,
-                    "count": 6,
+                    "row": 6,
+                    "count": 4,
+                    "start": 0
+                }
+            },"right_sword":{
+                "sprite_details":{
+                    "row": 7,
+                    "count": 4,
+                    "start": 0
+                }
+            },"up_sword":{
+                "sprite_details":{
+                    "row": 8,
+                    "count": 4,
+                    "start": 0
+                }
+            },"left_sword":{
+                "sprite_details":{
+                    "row": 7,
+                    "count": 4,
+                    "start": 0
+                }
+            },"death":{
+                "sprite_details":{
+                    "row": 9,
+                    "count": 3,
                     "start": 0
                 }
             }
+            
+
+
+
         },
         "Notes": "For the Values_Map, each entry gives 0 based row, count of sprites in row, start='topleft x' of first sprite."
     }

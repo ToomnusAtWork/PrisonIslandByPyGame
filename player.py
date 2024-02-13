@@ -1,5 +1,6 @@
 import pygame
 import spritesheet as ss
+from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
@@ -16,11 +17,12 @@ class Player(pygame.sprite.Sprite):
         # General attributes and animation
         self.image = self.animation[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
+        self.z = LAYERS['main']
 
         # Movement attributes
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
-        self.speed = 100
+        self.speed = 200
 
         # Timers for tool
         self.timers = {
@@ -90,7 +92,6 @@ class Player(pygame.sprite.Sprite):
             self.status = self.status.split('_')[0] + '_idle'
         
         if self.timers['tool use'].activate:
-            # pass
             self.status = self.status.split('_')[0] + '_' + self.selected_tool
 
     def update_timers(self):

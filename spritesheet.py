@@ -53,7 +53,8 @@ class SpriteSheet(object):
                     (start)+(self.dimensions()[0]*i),
                     (self.dimensions()[1]*row)
                 )+self.dimensions()
-                ta.append(self.spritesheetimg.subsurface(tup))
+                playerPic = pygame.transform.scale(self.spritesheetimg.subsurface(tup), (128,128))
+                ta.append(playerPic)
                 i += 1
             ret[key] = ta
         return ret

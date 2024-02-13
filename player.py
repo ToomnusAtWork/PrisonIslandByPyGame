@@ -22,11 +22,16 @@ class Player(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 100
 
-        # self.selected_tool = 'sword'
-
+        # Timers for tool
         self.timers = {
-            'tool use': Timer(350, self.use_tool)
+            'tool use': Timer(350, self.use_tool),
+            'tool swap': Timer(200)
         }
+
+        # Basic tools setup
+        self.tools = ['sword', 'pickaxe', 'axe']
+        self.tool_index = 0
+        self.selected_tool = self.tools[self.tool_index]
 
     def use_tool(self):
         pass
@@ -68,14 +73,24 @@ class Player(pygame.sprite.Sprite):
                 self.direction = pygame.math.Vector2()
                 self.frame_index = 0
 
+            if keys[pygame.K_q] and not self.timers['tool swap'].activate:
+                self.timers['tool swap'].activate()
+                # Ternary in python
+                self.tool_index = self.tool_index if self.tool_index < len(self.tools) else 0
+                if self.tool_index >= len(self.tools):
+                    self.tool_index = 0
+                self.tool_index += 1
+                self.selected_tool = self.tools[self.tool_index]
+
+
     def get_status(self):
 
         # idle status
         if self.direction.magnitude() == 0:
             self.status = self.status.split('_')[0] + '_idle'
         
-        # if self.timers['tool use'].activate:
-        #     self.status = self.status.split('_')[0] + '_' + self.selected_tool
+        if self.timers['tool use'].activate:
+            self.status = self.status.split('_')[0] + '_' + self.selected_tool
 
     def update_timers(self):
         for timer in self.timers.values():

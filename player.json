@@ -61,6 +61,13 @@
                     "count": 6,
                     "start": 0
                 }
+            },
+            "sword":{
+                "sprite_details":{
+                    "row": 4,
+                    "count": 6,
+                    "start": 0
+                }
             }
         },
         "Notes": "For the Values_Map, each entry gives 0 based row, count of sprites in row, start='topleft x' of first sprite."

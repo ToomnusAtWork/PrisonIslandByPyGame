@@ -4,12 +4,11 @@ from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group):
+    def __init__(self, pos, group, collision_sprites):
         super().__init__(group)
 
         # Player Animations
         self.sprite_sheet = ss.SpriteSheet('./Sprite/characters/player.png', 'player.json')
-        self.animation = self.sprite_sheet.sprites()
 
         self.status = 'down_idle'
         self.frame_index = 0
@@ -17,12 +16,18 @@ class Player(pygame.sprite.Sprite):
         # General attributes and animation
         self.image = self.animation[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
+        self.hitbox = self.rect.copy().inflate((-126, -70))
+        # change hitbox
         self.z = LAYERS['main']
 
         # Movement attributes
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 200
+
+        # Collision
+        self.collisionSprite = collision_sprites
+        self.animation = self.sprite_sheet.sprites()
 
         # Timers for tool
         self.timers = {
@@ -97,6 +102,11 @@ class Player(pygame.sprite.Sprite):
         for timer in self.timers.values():
             timer.update()
 
+    def collision(self, direction):
+        for sprite in self.collisionSprite.sprites():
+            if hasattr(sprite, 'hitbox'):
+                if sprite.hitbox.colliderect(self.hitbox):
+                    pass
 
     def move(self, dt):
         if self.direction.magnitude() > 0:
@@ -104,11 +114,13 @@ class Player(pygame.sprite.Sprite):
         
         # horizontal movement
         self.pos.x += self.direction.x * self.speed * dt
-        self.rect.centerx = self.pos.x
+        self.hitbox.centerx = round(self.pos.x)
+        self.rect.centerx = self.hitbox.centerx
 
         #vertical movement
         self.pos.y += self.direction.y * self.speed * dt
-        self.rect.centery = self.pos.y
+        self.hitbox.centery = round(self.pos.y)
+        self.rect.centery = self.hitbox.centery
 
     def update(self, dt):
         self.input()

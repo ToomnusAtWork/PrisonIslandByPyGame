@@ -13,6 +13,7 @@ class Level:
         # sprite groups
         self.all_sprites = CameraGroup()
         # Inherited
+        self.collision_sprites = pygame.sprite.Group()
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -24,7 +25,18 @@ class Level:
         #     for x, y, surf in map_data.get_layer_by_name(layer).tiles():
         #         Generic((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, LAYERS['house bottom'])
 
-        self.player = Player((640,360), self.all_sprites)
+        self.player = Player((640,360), self.all_sprites, self.collision_sprites)
+        # we pass collision in player as parameter
+        # but we pass collision in object as a container inside!
+
+        # Collision in game
+        for x, y, surf in tmx_data.get_layer_by_name('Collision').tiles():
+            Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.surface((TILE_SIZE, TILE_SIZE)), self.collision_sprites)
+
+        # Player starting point
+        for obj in tmx_data.get_layer_by_name('Player'):
+            if obj.name == 'Start':
+                self.player = Player((obj.x, obj.y) self.all_sprites, self.collision_sprites)
 
         # Instance of Generic
         Generic(pos = (0, 0), 
@@ -53,11 +65,10 @@ class CameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - SCREEN_WIDTH / 2
         self.offset.y = player.rect.centery - SCREEN_HEIGHT / 2
 
-
         # 1.47.37 in vid
         # draw map opposite of moving
         for layer in LAYERS.values():
-            for sprite in self.sprites():
+            for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
                 if sprite.z == layer:
                     offset_rect = sprite.rect.copy()
                     offset_rect.center -= self.offset

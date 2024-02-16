@@ -4,7 +4,7 @@ from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites):
+    def __init__(self, pos, group, collision_sprites, tree_sprites):
         super().__init__(group)
 
         # Player Animations
@@ -40,8 +40,22 @@ class Player(pygame.sprite.Sprite):
         self.tool_index = 0
         self.selected_tool = self.tools[self.tool_index]
 
+        # Interaction
+        self.treeSprites = tree_sprites
+
     def use_tool(self):
-        pass
+        if self.selected_tool == 'pickaxe':
+            pass
+        if self.selected_tool == 'axe':
+            for tree in self.treeSprites():
+                if tree.rect.collidepoint(self.target_pos):
+                    tree.damage()
+        if self.selected_tool == 'sword':
+            pass
+
+    # 3.00.00 in vids
+    def get_target_pos(self):
+        self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split('_')[0]]
 
     def animate(self, dt):
         self.frame_index += 6 * dt
@@ -126,6 +140,7 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.get_status()
         self.update_timers()
+        self.get_target_pos()
 
         self.move(dt)
         self.animate(dt)

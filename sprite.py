@@ -1,8 +1,8 @@
 import pygame
 from settings import *
 from settings import LAYERS
-from random import randint
-
+from random import randint, choice
+from timer import Timer
 class Generic(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups, z = LAYERS['main']):
         super().__init__(groups)
@@ -41,18 +41,59 @@ class Seashell(Generic):
         super().__init__(pos, surf, groups)
         self.hitbox = self.rect.copy().inflate(-20, -self.height * 0.9)
 
+class Particle(Generic):
+    def __init__(self, pos, surf, groups, z, duration = 200):
+        super().__init__(pos, surf, groups, z)
+        self.star_time = pygame.time.get_ticks()
+        self.duration = duration
+        
+        # white surface particle
+        mask_surf = pygame.mask.from_surface(self.image)
+        new_surf = mask_surf.to_surface()
+        new_surf.set_colorkey((255, 255, 255))
+        self.image = new_surf
+    
+    def update(self, dt):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.start_time > self.duration:
+            self.kill()
 
 class Tree(Generic):
     def __init__(self, pos, surf, groups, name):
         super().__init__(pos, surf, groups)
+
+        # Tree attributes
+        self.health = 5
+        self.alive = True
+        # need tree stump
+        self.stump_surf = pygame.image.load(f'../graphic/treestump').convert_alpha()
+        self.invul_timer = Timer(200)
 
         # Wood and apple drop
         self.apple_surf = pygame.image.load('../Sprite/item/apple.png')
         self.apple_pos = APPLE_POS[name]
         self.apple_sprites = pygame.sprite.Group()
 
+    def damage(self):
+        # tree damaging
+        self.health -= 1
+
+    def check_death(self):
+        if self.health <= 0:
+            self.image = self.stump_surf
+            self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
+            self.hitbox = self.rect.copy().inflate(-10, -self.rect.height * 0.6)
+            self.alive = False
+
+
     def create_fruit(self):
+        # create apple randomly on tree
         for pos in self.apple_pos:
             if randint(0, 10) < 2:
                 Generic()
 
+        # add wood drop and apple to tree
+
+    def update(self, dt):
+        if self.alive:
+            self.check_death()

@@ -14,6 +14,7 @@ class Level:
         self.all_sprites = CameraGroup()
         # Inherited
         self.collision_sprites = pygame.sprite.Group()
+        self.tree_sprites = pygame.sprite.Group()
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -36,7 +37,11 @@ class Level:
         # Player starting point
         for obj in tmx_data.get_layer_by_name('Player'):
             if obj.name == 'Start':
-                self.player = Player((obj.x, obj.y) self.all_sprites, self.collision_sprites)
+                self.player = Player(
+                    pos= (obj.x, obj.y),
+                    group= self.all_sprites, 
+                    collision_sprites= self.collision_sprites,
+                    tree_sprites= self.tree_sprites)
 
         # Instance of Generic
         Generic(pos = (0, 0), 

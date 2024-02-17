@@ -12,6 +12,13 @@ class Generic(pygame.sprite.Sprite):
         self.hitbox = self.rect.copy().inflate(-self.rect.width * 0.2, -self.rect.height * 0.75)
         # change hitbox
 
+
+class Interaction(Generic):
+    def __init__(self, pos, surf, size, groups, name):
+        surf = pygame.Surface(size)
+        super().__init__(pos, surf, groups)
+        self.name = name
+
 # Inheritance from generic
 class Water(Generic):
     def __init__(self, pos, frames, groups):
@@ -59,7 +66,7 @@ class Particle(Generic):
             self.kill()
 
 class Tree(Generic):
-    def __init__(self, pos, surf, groups, name):
+    def __init__(self, pos, surf, groups, name, player_add):
         super().__init__(pos, surf, groups)
 
         # Tree attributes
@@ -74,12 +81,22 @@ class Tree(Generic):
         self.apple_pos = APPLE_POS[name]
         self.apple_sprites = pygame.sprite.Group()
 
+        self.player_add = player_add
+
     def damage(self):
         # tree damaging
         self.health -= 1
+        Particle(
+            pos= x,
+            surf= y,
+            groups= self.groups()[0],
+            z= LAYERS['fruits']
+        )
+        self.player_add('wood')
 
     def check_death(self):
         if self.health <= 0:
+            Particle(self.rect.topleft, self.image, self.groups()[0], LAYERS['fruits'], 300)
             self.image = self.stump_surf
             self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
             self.hitbox = self.rect.copy().inflate(-10, -self.rect.height * 0.6)

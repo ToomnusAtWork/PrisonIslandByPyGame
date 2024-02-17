@@ -4,7 +4,7 @@ from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites):
+    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction):
         super().__init__(group)
 
         # Player Animations
@@ -40,8 +40,14 @@ class Player(pygame.sprite.Sprite):
         self.tool_index = 0
         self.selected_tool = self.tools[self.tool_index]
 
+        # Inventory
+        self.item_inventory = {
+            'wood': 0
+        }
+
         # Interaction
         self.treeSprites = tree_sprites
+        self.interaction = interaction
 
     def use_tool(self):
         if self.selected_tool == 'pickaxe':
@@ -101,6 +107,15 @@ class Player(pygame.sprite.Sprite):
                 # Ternary in python
                 self.tool_index = self.tool_index if self.tool_index < len(self.tools) else 0
                 self.selected_tool = self.tools[self.tool_index]
+
+            # Set and interaction button
+            if keys[pygame.K_f]:
+                collided_interaction_sprite = pygame.sprite.spritecollide(self, self.interaction, False)
+                if collided_interaction_sprite:
+                    if collided_interaction_sprite[0].name == 'Boat':
+                        self.status = 'left_idle'
+
+
 
 
     def get_status(self):

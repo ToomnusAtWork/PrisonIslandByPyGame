@@ -4,7 +4,7 @@ from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction):
+    def __init__(self, pos, group, collision_sprites):
         super().__init__(group)
 
         # Player Animations
@@ -12,6 +12,10 @@ class Player(pygame.sprite.Sprite):
 
         self.status = 'down_idle'
         self.frame_index = 0
+
+        # Collision
+        self.collisionSprite = collision_sprites
+        self.animation = self.sprite_sheet.sprites()
 
         # General attributes and animation
         self.image = self.animation[self.status][self.frame_index]
@@ -25,9 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 200
 
-        # Collision
-        self.collisionSprite = collision_sprites
-        self.animation = self.sprite_sheet.sprites()
+        
 
         # Timers for tool
         self.timers = {
@@ -46,8 +48,8 @@ class Player(pygame.sprite.Sprite):
         }
 
         # Interaction
-        self.treeSprites = tree_sprites
-        self.interaction = interaction
+        # self.treeSprites = tree_sprites
+        # self.interaction = interaction
 
     def use_tool(self):
         if self.selected_tool == 'pickaxe':
@@ -74,6 +76,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if not self.timers['tool use'].active:
+            # and not self.sleep
 
             # Create direction
             if keys[pygame.K_UP] or keys[pygame.K_w]:

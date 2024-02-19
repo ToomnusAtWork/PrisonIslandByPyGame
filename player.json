@@ -20,35 +20,28 @@
                     "start": 0
                 }
             },
-            "up_idle":{
+            "left_idle":{
                 "sprite_details":{
                     "row": 2,
                     "count": 6,
                     "start": 0
                 }
             },
-            "left_idle":{
-                "sprite_details":{
-                    "row": 1,
-                    "count": 6,
-                    "start": 0
-                }
-            },
-            "down":{
+            "up_idle":{
                 "sprite_details":{
                     "row": 3,
                     "count": 6,
                     "start": 0
                 }
             },
-            "right":{
+            "down":{
                 "sprite_details":{
                     "row": 4,
                     "count": 6,
                     "start": 0
                 }
             },
-            "up":{
+            "right":{
                 "sprite_details":{
                     "row": 5,
                     "count": 6,
@@ -57,32 +50,39 @@
             },
             "left":{
                 "sprite_details":{
-                    "row": 4,
+                    "row": 6,
+                    "count": 6,
+                    "start": 0
+                }
+            },
+            "up":{
+                "sprite_details":{
+                    "row": 7,
                     "count": 6,
                     "start": 0
                 }
             },
             "down_sword":{
                 "sprite_details":{
-                    "row": 6,
+                    "row": 8,
                     "count": 4,
                     "start": 0
                 }
             },"right_sword":{
                 "sprite_details":{
-                    "row": 7,
-                    "count": 4,
-                    "start": 0
-                }
-            },"up_sword":{
-                "sprite_details":{
-                    "row": 8,
+                    "row": 9,
                     "count": 4,
                     "start": 0
                 }
             },"left_sword":{
                 "sprite_details":{
-                    "row": 7,
+                    "row": 10,
+                    "count": 4,
+                    "start": 0
+                }
+            },"up_sword":{
+                "sprite_details":{
+                    "row": 11,
                     "count": 4,
                     "start": 0
                 }

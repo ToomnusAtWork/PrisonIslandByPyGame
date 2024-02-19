@@ -35,36 +35,36 @@ class Level:
         # but we pass collision in object as a container inside!
 
         # water animation
-        water_frames = import_folder('./Sprite')
+        # water_frames = import_folder('./Sprite')
 
         # Trees
-        for obj in tmx_data.get_layer_by_name('Trees'):
-            Tree(
-                pos= (obj.x, obj.y), 
-                surf= obj.image, 
-                groups= [self.all_sprites, self.collision_sprites, self.tree_sprites],
-                name= obj.name,
-                player_add= self.player_add)
+        # for obj in tmx_data.get_layer_by_name('Trees'):
+        #     Tree(
+        #         pos= (obj.x, obj.y), 
+        #         surf= obj.image, 
+        #         groups= [self.all_sprites, self.collision_sprites, self.tree_sprites],
+        #         name= obj.name,
+        #         player_add= self.player_add)
 
         # Collision in game
-        for x, y, surf in tmx_data.get_layer_by_name('Collision').tiles():
-            Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.surface((TILE_SIZE, TILE_SIZE)), self.collision_sprites)
+        # for x, y, surf in tmx_data.get_layer_by_name('Collision').tiles():
+        #     Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.surface((TILE_SIZE, TILE_SIZE)), self.collision_sprites)
 
         # Player starting point
-        for obj in tmx_data.get_layer_by_name('Player'):
-            if obj.name == 'Start':
-                self.player = Player(
-                    pos= (obj.x, obj.y),
-                    group= self.all_sprites, 
-                    collision_sprites= self.collision_sprites,
-                    tree_sprites= self.tree_sprites,
-                    interaction = self.interaction_sprites)
+        # for obj in tmx_data.get_layer_by_name('Player'):
+        #     if obj.name == 'Start':
+        #         self.player = Player(
+        #             pos= (obj.x, obj.y),
+        #             group= self.all_sprites, 
+        #             collision_sprites= self.collision_sprites,
+        #             tree_sprites= self.tree_sprites,
+        #             interaction = self.interaction_sprites)
                 
-            if obj.name == 'Boat':
-                Interaction((obj.x, obj.y), 
-                            (obj.width, obj.height), 
-                            self.interaction_sprites, 
-                            obj.name)
+        #     if obj.name == 'Boat':
+        #         Interaction((obj.x, obj.y), 
+        #                     (obj.width, obj.height), 
+        #                     self.interaction_sprites, 
+        #                     obj.name)
 
 
         # Instance of Generic

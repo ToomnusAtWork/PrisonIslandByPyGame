@@ -83,16 +83,16 @@ class Tree(Generic):
 
         self.player_add = player_add
 
-    def damage(self):
-        # tree damaging
-        self.health -= 1
-        Particle(
-            pos= x,
-            surf= y,
-            groups= self.groups()[0],
-            z= LAYERS['fruits']
-        )
-        self.player_add('wood')
+    # def damage(self):
+    #     # tree damaging
+    #     self.health -= 1
+    #     Particle(
+    #         pos= x,
+    #         surf= y,
+    #         groups= self.groups()[0],
+    #         z= LAYERS['fruits']
+    #     )
+    #     self.player_add('wood')
 
     def check_death(self):
         if self.health <= 0:

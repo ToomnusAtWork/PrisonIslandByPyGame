@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__(group)
 
         # Player Animations
-        self.sprite_sheet = ss.SpriteSheet('./Sprite/characters/player.png', 'player.json')
+        self.sprite_sheet = ss.SpriteSheet('./Sprite/characters/Player.png', 'player.json')
 
         self.status = 'down_idle'
         self.frame_index = 0

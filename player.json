@@ -2,7 +2,7 @@
     "SpriteSheetMap":{
         "Title": "Player Sprite 288 x 480pxs",
         "Sprite_Sheet": "player.png",
-        "Dimensions": [48, 48],
+        "Dimensions": [64, 64],
         "Value_Keys": ["down","left","right","up"],
         "Suffix_Keys":["_idle"],
         "Values_Map":{
@@ -20,14 +20,14 @@
                     "start": 0
                 }
             },
-            "left_idle":{
+            "up_idle":{
                 "sprite_details":{
                     "row": 2,
                     "count": 6,
                     "start": 0
                 }
             },
-            "up_idle":{
+            "left_idle":{
                 "sprite_details":{
                     "row": 3,
                     "count": 6,
@@ -48,53 +48,100 @@
                     "start": 0
                 }
             },
-            "left":{
+            "up":{
                 "sprite_details":{
                     "row": 6,
                     "count": 6,
                     "start": 0
                 }
             },
-            "up":{
+            "left":{
                 "sprite_details":{
                     "row": 7,
                     "count": 6,
                     "start": 0
                 }
             },
-            "down_sword":{
+            "down_pickaxe":{
                 "sprite_details":{
                     "row": 8,
                     "count": 4,
                     "start": 0
                 }
-            },"right_sword":{
+            },"right_pickaxe":{
                 "sprite_details":{
                     "row": 9,
                     "count": 4,
                     "start": 0
                 }
-            },"left_sword":{
+            },"up_pickaxe":{
                 "sprite_details":{
                     "row": 10,
                     "count": 4,
                     "start": 0
                 }
-            },"up_sword":{
+            },"left_pickaxe":{
                 "sprite_details":{
                     "row": 11,
                     "count": 4,
                     "start": 0
                 }
-            },"death":{
+            },"down_axe":{
+                "sprite_details":{
+                    "row": 12,
+                    "count": 4,
+                    "start": 0
+                }
+            },"right_axe":{
+                "sprite_details":{
+                    "row": 13,
+                    "count": 4,
+                    "start": 0
+                }
+            },"up_axe":{
+                "sprite_details":{
+                    "row": 14,
+                    "count": 4,
+                    "start": 0
+                }
+            },"left_axe":{
+                "sprite_details":{
+                    "row": 15,
+                    "count": 4,
+                    "start": 0
+                }
+            },"down_sword":{
+                "sprite_details":{
+                    "row": 16,
+                    "count": 4,
+                    "start": 0
+                }
+            },"right_sword":{
+                "sprite_details":{
+                    "row": 17,
+                    "count": 4,
+                    "start": 0
+                }
+            },"up_sword":{
+                "sprite_details":{
+                    "row": 18,
+                    "count": 4,
+                    "start": 0
+                }
+            },"left_sword":{
+                "sprite_details":{
+                    "row": 19,
+                    "count": 4,
+                    "start": 0
+                }
+            },
+            "death":{
                 "sprite_details":{
                     "row": 9,
                     "count": 3,
                     "start": 0
                 }
             }
-            
-
 
 
         },

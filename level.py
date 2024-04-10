@@ -4,7 +4,6 @@ from player import Player
 from overlay import Overlay
 from sprite import Generic, Water, Tree, Interaction
 from pytmx.util_pygame import load_pygame
-# from support import *
 from transition import Transition
 
 class Level:
@@ -100,7 +99,6 @@ class CameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - SCREEN_WIDTH / 2
         self.offset.y = player.rect.centery - SCREEN_HEIGHT / 2
 
-        # 1.47.37 in vid
         # draw map opposite of moving
         for layer in LAYERS.values():
             for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
@@ -108,8 +106,3 @@ class CameraGroup(pygame.sprite.Group):
                     offset_rect = sprite.rect.copy()
                     offset_rect.center -= self.offset
                     self.display_surface.blit(sprite.image, offset_rect)
-
-        
-
-    
-        

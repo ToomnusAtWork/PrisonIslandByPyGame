@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animation[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
         self.hitbox = self.rect.copy().inflate((-126, -70))
+        
         # change hitbox
         self.z = LAYERS['main']
 
@@ -28,8 +29,6 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 200
-
-        
 
         # Timers for tool
         self.timers = {
@@ -61,7 +60,6 @@ class Player(pygame.sprite.Sprite):
         if self.selected_tool == 'sword':
             pass
 
-    # 3.00.00 in vids
     def get_target_pos(self):
         self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split('_')[0]]
 
@@ -117,9 +115,6 @@ class Player(pygame.sprite.Sprite):
                 if collided_interaction_sprite:
                     if collided_interaction_sprite[0].name == 'Boat':
                         self.status = 'left_idle'
-
-
-
 
     def get_status(self):
 

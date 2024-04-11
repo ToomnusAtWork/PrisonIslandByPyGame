@@ -13,5 +13,5 @@ Locate file and run or script withinh your directory of file loacated
 ```
 
 ## Report preview for this project
-[OOPGroupProjectPreview](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/ToomnusAtWork/Assignment_2_OOAP/main/รายงานproject%E0%B8%81ลุ่ม_OOP_0872.pdf)
+[OOPGroupProjectPreview](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/ToomnusAtWork/PrisonIslandByPyGame/main/รายงานproject%E0%B8%81ลุ่ม_OOP_0872.pdf)
 

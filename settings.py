@@ -1,10 +1,11 @@
 from pygame.math import Vector2
-# screen
+
+# Screen Resolution
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 TILE_SIZE = 64
 
-# Define some of the colors
+# Define colors
 BlackBG = (0, 0 ,0)
 White = (255, 255, 255)
 
@@ -50,6 +51,7 @@ SALE_PRICES = {
 	'corn': 10,
 	'tomato': 20
 }
+
 PURCHASE_PRICES = {
 	'corn': 4,
 	'tomato': 5

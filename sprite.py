@@ -43,7 +43,7 @@ class Water(Generic):
         self.animate(dt)
     
 
-class Seashell(Generic):
+class Decorative(Generic):
     def __init__(self, pos, surf, groups):
         super().__init__(pos, surf, groups)
         self.hitbox = self.rect.copy().inflate(-20, -self.height * 0.9)
@@ -51,7 +51,7 @@ class Seashell(Generic):
 class Particle(Generic):
     def __init__(self, pos, surf, groups, z, duration = 200):
         super().__init__(pos, surf, groups, z)
-        self.star_time = pygame.time.get_ticks()
+        self.start_time = pygame.time.get_ticks()
         self.duration = duration
         
         # white surface particle
@@ -74,6 +74,7 @@ class Tree(Generic):
         self.alive = True
         # need tree stump
         self.stump_surf = pygame.image.load(f'../graphic/treestump').convert_alpha()
+
         self.invul_timer = Timer(200)
 
         # Wood and apple drop

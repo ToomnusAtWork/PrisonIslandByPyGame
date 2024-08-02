@@ -13,7 +13,8 @@ class Level:
 
         # sprite groups
         self.all_sprites = CameraGroup()
-        # Inherited
+
+        # collision inherited pygame group sprite
         self.collision_sprites = pygame.sprite.Group()
         self.tree_sprites = pygame.sprite.Group()
         self.interaction_sprites = pygame.sprite.Group()
@@ -23,20 +24,27 @@ class Level:
         self.transition = Transition(self.reset, self.player)
 
     def setup(self):
-        # map_data = load_pygame('./Maps/map.tmx')
+        # map_data is basically tmx data 
+        # map_data = load_pygame('./Data/map.tmx')
 
-        # for layer in ['HouseFloor', 'HouseFurniture']:
-        #     for x, y, surf in map_data.get_layer_by_name(layer).tiles():
-        #         Generic((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, LAYERS['house bottom'])
+        # Water animation
+        # water_frames = import_folder('./Sprite/water')
+        # for x, y, surf in map_data.get_layer_by_name('Water').tiles():
+        #     Water((x * TILE_SIZE, y * TILE_SIZE), waater_frames, self.all_sprites)
 
-        self.player = Player((640,360), self.all_sprites, self.collision_sprites)
-        # we pass collision in player as parameter
-        # but we pass collision in object as a container inside!
+        # Fence placement 
+        # for x, y, surf in map_data.get_layer_byname('Fence').tiles():
+        #     Generic((x * TILE_SIZE, y * TILE_SIZE), surf, [self.all_sprites, self.collision_sprites])
 
-        # water animation
-        # water_frames = import_folder('./Sprite')
-
-        # Trees
+        # Decoration placement
+        # for obj in map_data.get_layer_by_name('Decoration').tiles():
+            # Decorativeree(
+            #     pos= (obj.x, obj.y), 
+            #     surf= obj.image, 
+            #     groups= [self.all_sprites, self.collision_sprites]
+            #     )
+        
+        # Trees placement 
         # for obj in tmx_data.get_layer_by_name('Trees'):
         #     Tree(
         #         pos= (obj.x, obj.y), 
@@ -45,7 +53,14 @@ class Level:
         #         name= obj.name,
         #         player_add= self.player_add)
 
-        # Collision in game
+        # Rocks placement
+        # for obj in tmx_data.get_layer_by_name('Rocks'):
+        #     Rock(
+        #         pos= (obj.x, obj.y),
+        #         surf= obj.image,
+        #     )
+
+        # Collision in obj from tmx data in game 
         # for x, y, surf in tmx_data.get_layer_by_name('Collision').tiles():
         #     Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.surface((TILE_SIZE, TILE_SIZE)), self.collision_sprites)
 
@@ -65,10 +80,13 @@ class Level:
         #                     self.interaction_sprites, 
         #                     obj.name)
 
+        self.player = Player((640,360), self.all_sprites, self.collision_sprites, self.tree_sprites)
+        # we pass collision in player as parameter
+        # but we pass collision in object as a container inside!
 
         # Instance of Generic
         Generic(pos = (0, 0), 
-                surf = pygame.image.load('./Maps/Island.png').convert_alpha(), 
+                surf = pygame.image.load('./Maps/NewIsland.png').convert_alpha(), 
                 groups = self.all_sprites,
                 z = LAYERS['ground'])
         
@@ -80,7 +98,7 @@ class Level:
         self.new = APPLE_POS
 
     def run(self, dt):
-        self.display_surface.fill('white')
+        self.display_surface.fill('#71ddee')
         # self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
         self.all_sprites.update(dt)

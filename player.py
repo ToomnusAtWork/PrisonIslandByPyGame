@@ -4,12 +4,11 @@ from settings import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites):
+    def __init__(self, pos, group, collision_sprites, tree_sprites):
         super().__init__(group)
 
         # Player Animations
         self.sprite_sheet = ss.SpriteSheet('./Sprite/characters/Player.png', 'player.json')
-
         self.status = 'down_idle'
         self.frame_index = 0
 
@@ -20,6 +19,8 @@ class Player(pygame.sprite.Sprite):
         # General attributes and animation
         self.image = self.animation[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
+        
+        # change hitbox 
         self.hitbox = self.rect.copy().inflate((-126, -70))
         
         # change hitbox
@@ -47,14 +48,14 @@ class Player(pygame.sprite.Sprite):
         }
 
         # Interaction
-        # self.treeSprites = tree_sprites
+        self.treeSprites = tree_sprites
         # self.interaction = interaction
 
     def use_tool(self):
         if self.selected_tool == 'pickaxe':
             pass
         if self.selected_tool == 'axe':
-            for tree in self.treeSprites():
+            for tree in self.treeSprites.sprites():
                 if tree.rect.collidepoint(self.target_pos):
                     tree.damage()
         if self.selected_tool == 'sword':
@@ -133,9 +134,26 @@ class Player(pygame.sprite.Sprite):
         for sprite in self.collisionSprite.sprites():
             if hasattr(sprite, 'hitbox'):
                 if sprite.hitbox.colliderect(self.hitbox):
-                    pass
+                    # check collide in horizontal axis
+                    if direction == 'horizontal':
+                        if self.direction.x > 0: # check if the collision side is on right
+                            self.hitbox.right = sprite.hitbox.left
+                        if self.direction.x < 0: # check if the collision side is on left
+                            self.hitbox.left = sprite.hitbox.right
+                        self.rect.centerx = self.hitbox.centerx
+                        self.pos.x = self.hitbox.centerx
+                    # check collide in vertical axis
+                    if direction == 'vertical':
+                        if self.direction.y > 0: # check if the down side is collide
+                            self.hitbox.up = sprite.hitbox.down
+                        if self.direction.y < 0: # check if the up side collide
+                            self.hitbox.up = sprite.hitbox.up
+                        self.rect.centery = self.hitbox.centery
+                        self.pos.y = self.hitbox.centery
+                    
 
     def move(self, dt):
+        # normalize vector speed in same speed
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         
@@ -143,11 +161,13 @@ class Player(pygame.sprite.Sprite):
         self.pos.x += self.direction.x * self.speed * dt
         self.hitbox.centerx = round(self.pos.x)
         self.rect.centerx = self.hitbox.centerx
+        self.collision('horizontal')
 
-        #vertical movement
+        # vertical movement
         self.pos.y += self.direction.y * self.speed * dt
         self.hitbox.centery = round(self.pos.y)
         self.rect.centery = self.hitbox.centery
+        self.collision('vertical')
 
     def update(self, dt):
         self.input()
